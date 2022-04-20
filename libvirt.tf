@@ -27,6 +27,7 @@ resource "libvirt_domain" "xenial" {
 
   network_interface {
     network_name = "default" # List networks with virsh net-list
+    wait_for_lease = true
   }
 
   disk {
@@ -50,5 +51,5 @@ resource "libvirt_domain" "xenial" {
 
 # Output Server IP
 output "ip" {
-  value = "${libvirt_domain.xenial.network_interface.0.addresses.0}"
+  value = "${libvirt_domain.xenial.network_interface.0.addresses[0]}"
 }
